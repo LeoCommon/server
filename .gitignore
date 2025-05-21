@@ -1,0 +1,7 @@
+__pychache__
+*.py[cod]*
+env/
+*.Rhistory
+app/server/file_uploads/*
+*.idea/
+
