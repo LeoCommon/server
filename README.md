@@ -21,17 +21,17 @@
 
 3.  Activate the virtual environment:
 
-   $ `source env/bin/activate`
+    $ `source env/bin/activate`
 
-4. Install the requirements:
+6. Install the requirements:
 
    (env)$ `pip install -r requirements.txt`
 
-5. Create the jwt-secrets file:
+7. Create the jwt-secrets file:
 
    (env)$ `echo 'AUTHJWT_SECRET_KEY="placeMySecretKeyHere"' > env/.env`
 
-6. Deactivate the virtual environment by entering `deactivate`
+8. Deactivate the virtual environment by entering `deactivate`
 
 Note: if a system upgrade messes with the virtual environment and upgrades python version by accident, the simplest fix is to uninstall the virtual environment (`rm -r env`), install python3.11 if it's not on the system anymore and create a new virtual environment (step 2 to 6).
 
@@ -77,7 +77,7 @@ Note: if a system upgrade messes with the virtual environment and upgrades pytho
 
 3. Reload NginX: $ `sudo systemctl reload nginx`
 
-4. Run Certbot to create the certificates: $ `sudo certbot --nginx -d discosat.cs.uni-kl.de`
+4. Run Certbot to create the certificates: $ `sudo certbot --nginx -d myLeoCommonDummyUrl.com`
 
 5. Start the Certbot Timer: $ `sudo systemctl start certbot.timer`
 
@@ -99,7 +99,7 @@ Use the `startup.sh`-script or do it manually:
 
 4. The application has to be run in the virtual environment where the requirements are installed.
 
-   $ `cd discosat_server`
+   $ `cd server`
 
 ​   $ `source env/bin/activate`
 
@@ -115,15 +115,23 @@ Finally, run the application:
 
 
 ## Run the Application using screen
-1. `screen` :open a screen session
+1. Open a screen session: $ `screen`
 
-2. `./startup.sh`
+2. Run the application with the startup script: $ `./startup.sh`
 
-3. `strg+a`, `d` :detatch the current session
+3. Detatch the current session: $ `ctrl+a`, `d`
 
-4. `screen -ls` :list all detatched sessions
+4. Close the terminal.
 
-5. `screen -r <sessionName>` :connect to a specific session
+Access the detatched screen session and terminate the server:
+
+1. List all detatched sessions: $ `screen -ls`
+
+2. Connect to a specific session: $ `screen -r <sessionName>`
+
+3. Terminate the server: $ `ctrl-x`
+
+4. End the screen session: $ `exit`
 
 
 ## Development environment
@@ -140,7 +148,7 @@ The development environment offers:
 
 2. Copy http_dev.conf to http.conf: $ `cp http_dev.conf http.conf` 
 
-3. http.conf: change `root /home/disco/discosat_server/app/static;` to your own path to the /app/static-folder
+3. http.conf: change `root /home/user/server/app/static;` to your own path to the /app/static-folder
 
 4. Copy the http.conf to `/etc/nginx/conf.d/http.conf`
 
@@ -228,10 +236,10 @@ This section lists errors that can occur by wrongly operating the application an
 
    $ `mongo` (Ctrl+c for exit)
 
-- Create Certficates: $ `openssl req -x509 -newkey rsa:4096 -sha256 -days 365 -nodes -keyout discosat.cs.uni-kl.de.key -out discosat.cs.uni-kl.de.crt -subj "/C=DE/ST=Rhineland-Palatinate/L=Kaiserslautern/O=University Kauserslautern/OU=DistributedComputerSystemsLab/CN=www.discosat.cs.uni-kl.de" -addext "subjectAltName=DNS:discosat.cs.uni-kl.de,DNS:www.discosat.cs.uni-kl.de,DNS:discosat.informatik.uni-kl.de,DNS:www.discosat.informatik.uni-kl.de"`
+- Create Certficates: $ `openssl req -x509 -newkey rsa:4096 -sha256 -days 365 -nodes -keyout myDummyLeoCommonUrl.key -out myDummyLeoCommonUrl.crt -subj "/C=DE/ST=Rhineland-Palatinate/L=Kaiserslautern/O=University Kauserslautern/OU=DistributedComputerSystemsLab/CN=www.myDummyLeoCommonUrl.com" -addext "subjectAltName=DNS:myDummyLeoCommonUrl.com"`
 
-- "I set up ngnix correctly but get a 404." -> check if the http user can access the discosat directory. This is can be a problem in development settings. 
-  Test access: `sudo -u http stat <path>/discosat`
+- "I set up ngnix correctly but get a 404." -> check if the http user can access the server directory. This is can be a problem in development settings. 
+  Test access: `sudo -u http stat <path>/server`
 
 #### Delete a user and his tokens directly in the DB
 
