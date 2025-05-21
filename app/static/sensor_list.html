@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>DiscoSAT Sensor Management System</title>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <meta charset="UTF-8">
+  <link rel=stylesheet href=nav_common.css>
+  <script src="javascript/jquery-3.6.0.js"></script>
+  <style>
+    /* flex-specific */
+    div#page       {
+        display:    grid;
+        grid-template-columns:  10em 1fr 10em;             /* 3 Spalten, die mittlere variabel breit */
+        grid-template-rows:     repeat(4, auto);           /* 4 Zeilen (kann man weglassen) */
+    }
+    div#page_header{ grid-column:  1 / -1; grid-row:  1; } /* Zeile 1, alle Spalten */
+    div#page_top   { grid-column:  1 / -1; grid-row:  2; } /* Zeile 2, alle Spalten */
+    div#page_left  { grid-column:  1     ; grid-row:  3; } /* Zeile 3, 1. Spalte    */
+    div#content    { grid-column:  2 / -1; grid-row:  3; } /* Zeile 3, Spalte 2, 3    */
+    div#page_bottom{ grid-column:  1 / -1; grid-row:  4; } /* Zeile 4, alle Spalten */
+
+    #sensors_menu_button {color: white}
+
+    /* debug support - nur zum Testen aktivieren */
+    /* .page, #content { outline: thin solid blue; } */
+
+  </style>
+</head>
+
+<body>
+<div id=page>
+  <div id=page_header class=page>
+    DiscoSAT Sensor Management System
+  </div>
+  <div id="page_top" class="page topnav">
+    <a href="data.html">Database</a>
+    <a id="sensors_menu_button" href="sensor_list.html"><b>Sensor List</b></a>
+    <a href="fixedjobs.html">Job List</a>
+    <a href="user_list.html">User List</a>
+    <div class="topnav-right">
+      <a id="logoutButton" class="LogoutButton" href=".">Logout</a>
+    </div>
+  </div>
+  <div id=page_left class=page >
+    <ul>
+      <li><button id="add_jobs_to_all" class="normal_buttons">Add Jobs to All</button>
+      <li><button id="clear_all_jobs" class="normal_buttons">Clear All Jobs</button>
+      <li><button id="add_sensor" class="normal_buttons">Add Sensor</button>
+      <li><button id="remove_sensor" class="normal_buttons">Remove Sensor</button>
+      <li><button id="update_location_list" class="normal_buttons">Update Location Map</button>
+    </ul>
+  </div>
+  <div id=content >
+
+    <table id=table class="tables_with_ellipsis_overflow" style="height:1px;"> <!--height of 1px is weird fix for getting table content to fill in whole space-->
+      <tr id=table_header>
+        <th id="sensorList_name_column">Sensor Name</th>
+        <th id="sensorList_contact_column">Last Sensor Contact</th>
+        <th id="sensorList_jobs_column">Jobs</th>
+        <th id="sensorList_buttons_column"></th>
+      </tr>
+
+      <tbody id=table_content>
+
+      </tbody>
+    </table>
+
+  </div>
+  <div id=page_bottom class=page >
+    <ul>
+      <li><a href="impressum.html">Impressum</a>
+    </ul>
+  </div>
+</div>
+</body>
+</html>
+
+<script src="javascript/refresh.js" type="text/javascript"></script>
+<script src="javascript/common.js" type="text/javascript"></script> <!--important: common.js must be called before page specific one!-->
+<script src="javascript/sensor_list.js" type="text/javascript"></script>

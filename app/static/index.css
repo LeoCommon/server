@@ -1,0 +1,159 @@
+/* body {
+    font-family: sans-serif;
+    margin: 20;
+    padding: 0;
+    display: flex;
+    min-height: 100vh;
+    width: 60%;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-body {
+    display: flex;
+    width: 100%;
+    height: 90%;
+    background-color: #fff;
+    overflow: hidden;
+    flex-wrap: wrap;
+}
+
+.text{
+    width: 100%;
+}
+
+
+
+#map { 
+    margin: 10;
+    align-items: center;
+    width: 50%;
+    min-height: 600px;
+    border: 5px  #014463f5 solid;}
+
+.olControlAttribution {
+    bottom: 0px !important;
+    right: 1px !important;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.highlight{
+    color: #014463f5;
+} */
+
+:root{
+    --dark-blue: #001c2bf5;
+    --lighter-blue: #014463f5;
+    --light-blue: #0075acdb;
+    --warning-color: #9e0045;
+}
+
+* {
+    box-sizing: border-box;
+
+}
+
+html {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}   
+  
+body {
+    font-family: Arial;
+    margin: 0px auto;
+    padding: 0px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.header {
+    padding: 10px;
+    padding-left: -100px;
+    text-align: center;
+    background: white;
+    
+}
+.header h1 {
+    font-size: 50px;
+    color: black;
+}
+
+.topnav {
+    overflow: hidden;
+    background-color: black;
+}
+.topnav a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+.topnav a:hover {
+    font-weight: bold;
+}
+
+
+.main-body {   
+    justify-content: center;    
+    text-align: center;
+    width: 60%;
+    margin: auto;
+}
+#map { 
+    width: 75%;
+    min-height: 600px;
+    border: 5px  var(--dark-blue) solid;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.olControlAttribution {
+    bottom: 0px !important;
+    right: 1px !important;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.row::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+
+.footer {
+    padding: 20px;
+    text-align: center;
+    background: black;
+    color: white;
+    margin: 20px 0 0 0;
+}
+#impressum{
+    color: gray;
+}
+
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 800px) {
+.leftcolumn, .rightcolumn {   
+    width: 100%;
+    padding: 0;
+}
+}
+
+/* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+@media screen and (max-width: 400px) {
+.topnav a {
+    float: none;
+    width: 100%;
+}
+}
+
+.highlight{
+    color: var(--lighter-blue) !important;
+} 
+

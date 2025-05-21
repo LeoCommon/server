@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>DiscoSAT Sensor Management System</title>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <meta charset="UTF-8">
+  <link rel=stylesheet href=nav_common.css>
+  <link rel=stylesheet href=jquery-ui.css>
+  <script src="javascript/jquery-3.6.0.js"></script>
+  <script src="javascript/jquery-ui.js"></script>
+  <style>
+    /* flex-specific */
+    div#page       {
+        display:    grid;
+        grid-template-columns:  10em 1fr 10em;             /* 3 Spalten, die mittlere variabel breit */
+        grid-template-rows:     repeat(4, auto);           /* 4 Zeilen (kann man weglassen) */
+    }
+    div#page_header{ grid-column:  1 / -1; grid-row:  1; } /* Zeile 1, alle Spalten */
+    div#page_top   { grid-column:  1 / -1; grid-row:  2; } /* Zeile 2, alle Spalten */
+    div#page_left  { grid-column:  1     ; grid-row:  3; } /* Zeile 3, 1. Spalte    */
+    div#content    { grid-column:  2 / -1; grid-row:  3; } /* Zeile 3, Spalte 2, 3    */
+    div#page_bottom{ grid-column:  1 / -1; grid-row:  4; } /* Zeile 4, alle Spalten */
+
+    #sensors_menu_button {color: white}
+
+    /* debug support - nur zum Testen aktivieren */
+    /* .page, #content { outline: thin solid blue; } */
+
+    /* make change_password_dialog nice: from jQuery UI*/
+
+    label, input { display:block; }
+    input.text { margin-bottom:12px; width:95%; padding: .4em; }
+    fieldset { padding:0; border:0; margin-top:25px; }
+
+  </style>
+</head>
+
+<body>
+<div id=page>
+  <div id=page_header class=page>
+    DiscoSAT Sensor Management System
+  </div>
+  <div id="page_top" class="page topnav">
+    <a href="data.html">Database</a>
+    <a href="sensor_list.html">Sensor List</a>
+    <a href="fixedjobs.html">Job List</a>
+    <a href="user_list.html">User List</a>
+    <div class="topnav-right">
+      <a id="logoutButton" class="LogoutButton" href=".">Logout</a>
+    </div>
+  </div>
+  <div id=page_left class=page >
+  </div>
+  <div id=content >
+    <h3 style="display: inline-block">Impressum </h3>
+    
+    <ul style="list-style-type: none;">
+      <li>Rheinland-Pfälzische Technische Universität Kaiserslautern-Landau</li>
+      <li>Gottlieb-Daimler-Straße, Gebäude 47 </li>
+      <li>67663 Kaiserslautern</li>
+      <li>Germany</li>
+      <br>
+      <li >Contact Person:</li>
+        <ul>
+          <li>Eric Jedermann</li>
+          <li>E-Mail: jedermann[at]cs.uni-kl.de</li>
+        </ul>
+        <br>
+      <li> Group Website:</li>
+      <ul>
+        <li><a class="clickables" href="https://disco.cs.uni-kl.de">disco.cs.uni-kl.de</a></li>
+      </ul>
+    </ul>
+
+      </tbody>
+    </table>
+
+  </div>
+  <div id=page_bottom class=page >
+    <ul>
+      <li><a href="#">Impressum</a>
+    </ul>
+  </div>
+</div>
+
+</body>
+</html>
+
+<script src="javascript/refresh.js" type="text/javascript"></script>
+<script src="javascript/common.js" type="text/javascript"></script> <!--important: common.js must be called before page specific one!-->

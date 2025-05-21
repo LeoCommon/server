@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>DiscoSAT Sensor Management System</title>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <meta charset="UTF-8">
+  <link rel=stylesheet href=nav_common.css>
+  <link rel=stylesheet href=jquery-ui.css>
+  <script src="javascript/jquery-3.6.0.js"></script>
+  <script src="javascript/jquery-ui.js"></script>
+  <style>
+    /* flex-specific */
+    div#page       {
+        display:    grid;
+        grid-template-columns:  10em 1fr 10em;             /* 3 Spalten, die mittlere variabel breit */
+        grid-template-rows:     repeat(4, auto);           /* 4 Zeilen (kann man weglassen) */
+    }
+    /* Grid placement */
+    div#page_header{ grid-column:  1 / -1; grid-row:  1; } /* Zeile 1, alle Spalten */
+    div#page_top   { grid-column:  1 / -1; grid-row:  2; } /* Zeile 2, alle Spalten */
+    div#page_left  { grid-column:  1     ; grid-row:  3; } /* Zeile 3, 1. Spalte    */
+    div#content    { grid-column:  2 / -1; grid-row:  3; } /* Zeile 3, Spalte 2, 3    */
+    div#page_bottom{ grid-column:  1 / -1; grid-row:  4; } /* Zeile 4, alle Spalten */
+
+    /* specific settings */
+    #fixed_jobs_btn  { color: white  }
+    /*#create_fixed_job { background-color: #005F8C91; color:White}*/
+
+    /* flexbox */
+    div#content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      align-content: flex-start;
+      gap: 10px;
+    }
+
+    /* flex items */
+    #content > div {
+      border: 3px solid;
+      text-align: left;
+      padding: 0 10px;
+    }
+
+    /* flex item content */
+    #content ul {
+      list-style-type: none;
+      padding: 0px 5px;
+    }
+
+    /* align key value pairs */
+    #content b {
+      display: inline-block;
+      width: 100px;
+      text-align: left;
+    }
+
+    .fixed_jobs button {
+      margin-bottom: 5px;
+    }
+
+    /* debug support - nur zum Testen aktivieren */
+    /*.page, #content { outline: thin solid blue; } */
+
+    /* from jQuery UI*/
+    table {
+	     font-size: 1em;
+    }
+
+    .ui-draggable, .ui-droppable {
+	     background-position: top;
+    }
+
+    label, input { display:block; }
+    input.text { margin-bottom:12px; width:95%; padding: .4em; }
+    fieldset { padding:0; border:0; margin-top:25px; }
+    h1 { font-size: 1.2em; margin: .6em 0; }
+    .ui-dialog .ui-state-error { padding: .3em; }
+    .validateTips { border: 1px solid transparent; padding: 0.3em; }
+
+  </style>
+</head>
+
+<body>
+<div id=page>
+  <div id=page_header class=page>
+    DiscoSAT Sensor Management System
+  </div>
+  <div id="page_top" class="page topnav">
+    <a href="data.html">Database</a>
+    <a href="sensor_list.html">Sensor List</a>
+    <a id="fixed_jobs_btn" href="fixedjobs.html"><b>Job List</b></a>
+    <a href="user_list.html">User List</a>
+    <div class="topnav-right">
+      <a id="logoutButton" class="LogoutButton" href=".">Logout</a>
+    </div>
+  </div>
+  <div id=page_left class=page >
+    <ul>
+      <!-- left menu -->
+      <li><button class="normal_buttons" id="create_fixed_job">Create New</button></li>
+
+    </ul>
+  </div>
+  <div id=content >
+
+    <table id=table class="tables_with_ellipsis_overflow">
+      <tr id=table_header>
+        <th id="jobList_name_column">Job Name</th>
+        <th id="jobList_status_column">Status</th>
+        <th id="jobList_sensors_column">Sensors</th>
+        <th id="jobList_start_column">Start Time</th>
+        <th id="jobList_end_column">End Time</th>
+        <th id="jobList_command_column">Command</th>
+        <th id="jobList_deleteButton_column"></th>
+      </tr>
+
+      <tbody id=table_content>
+
+      </tbody>
+    </table>
+
+  </div>
+  <div id=page_bottom class=page >
+    <ul>
+      <li><a href="impressum.html">Impressum</a>
+    </ul>
+  </div>
+</div>
+
+
+ <!-- 'Create new fixed job' form -->
+
+<dialog id="dialog-form" title="Create Fixed Job">
+  <p class="validateTips">
+    Name has to be unique.<br>
+    Argument field not required for all commands.<br>
+    <br>
+    Note: Please enter your local date/time. It then is automatically converted to the respective UTC date/time.
+  </p>
+  <!--Time inputs as <a id="unixtimestamp" class="clickables" href="https://www.unixtimestamp.com/" target="_blank">Unix Timestamp</a>.-->
+
+  <form>
+    <fieldset>
+      <label for="name">Job Name</label>
+      <input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all">
+      <label for="start_date">Start Date</label>
+      <input type="date" name="start_date" id="start_date" class="text ui-widget-content ui-corner-all">
+      <label for="start_time">Start Time</label>
+      <input type="time" name="start_time" id="start_time" class="text ui-widget-content ui-corner-all">
+      <label for="end_date">End Date</label>
+      <input type="date" name="end_date" id="end_date" class="text ui-widget-content ui-corner-all">
+      <label for="end_time">End Time</label>
+      <input type="time" name="end_time" id="end_time" class="text ui-widget-content ui-corner-all">
+      <!--<label for="start_time">Start Time</label>-->
+      <!--<input type="datetime-local" name="start_time" id="start_time" class="text ui-widget-content ui-corner-all">-->
+      <!--<label for="end_time">End Time</label>-->
+      <!--<input type="datetime-local" name="end_time" id="end_time" class="text ui-widget-content ui-corner-all">-->
+      <label for="command">Command</label>
+      <input type="text" name="command" id="command" class="text ui-widget-content ui-corner-all" list="command-list" placeholder="double-click for options or type">
+      <datalist id="command-list">
+        <option>get_status</option>
+        <option>get_full_status</option>
+        <option>iridium_sniffing</option>
+        <option>get_logs</option>
+        <option>reboot</option>
+        <option>reset</option>
+        <option>set_network_conn</option>
+        <option>set_wifi_config</option>
+        <option>set_eth_config</option>
+        <option>set_gsm_config</option>
+        <option>get_sys_config</option>
+        <option>set_sys_config</option>
+      </datalist>
+
+
+      <label for="cmd_args">Arguments</label>
+      <input type="text" name="cmd_args" id="cmd_args" class="text ui-widget-content ui-corner-all" placeholder="arg1: val1, arg2: val2">
+
+      <!-- Allow form submission with keyboard without duplicating the dialog button -->
+      <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+    </fieldset>
+  </form>
+</dialog>
+
+
+</body>
+</html>
+
+<script src="javascript/refresh.js" type="text/javascript"></script>
+<script src="javascript/common.js" type="text/javascript"></script> <!--important: common.js must be called before page specific one!-->
+<script src="javascript/fixedjobs.js" type="text/javascript"></script>

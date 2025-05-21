@@ -1,0 +1,13 @@
+version: '3.1'
+
+services:
+  mongo-satos:
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+          - disatmongo:/data/db
+
+volumes:
+  disatmongo:

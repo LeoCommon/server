@@ -1,0 +1,219 @@
+/* Allgemeine Optik-Regeln */
+
+/*make global color variables in the document such that we have to pick the color just once (root such that it is accessible in the whole document)*/
+:root{
+    --dark-blue: #001c2bf5;
+    --lighter-blue: #014463f5;
+    --light-blue: #0075acdb;
+    --warning-color: #9e0045;
+}
+
+
+/* fonts,colors */
+
+
+  
+html,body 		    { 
+    background: white;
+    font-family: sans-serif; 
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    min-height: 100%;
+    
+}
+
+#page_header 	{ 
+    background-color: var(--dark-blue);
+    font-size: 2.5em; 
+    font-weight: bold; 
+    color: rgb(255, 255, 255); 
+    height: 70px;
+    padding: auto;
+}
+
+#page_bottom 	{ 
+    background: var(--dark-blue);  
+    height: 20px;
+    padding-left: 0;
+    padding-right: 0;
+    width: 100%;
+    text-align: center;
+}
+
+/* padding and inner spaces */
+.page 		{ 
+    background: white;
+    padding: 5px 8px; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    float: left;
+}
+
+#page{
+    height: 100vh;
+}
+
+#content    { 
+    padding: 5px; 
+    padding-left: 20px; 
+    min-height: calc(100vh - 150px);
+    
+    
+    overflow: auto;
+
+    
+
+    /* page-decoration (shadow, some lines, ...) */
+    border-left: 3px dotted silver; 
+}
+
+
+.topnav{
+    height: 20px;
+    background: var(--lighter-blue);
+    overflow: hidden;
+    padding: auto;
+}
+.topnav a {
+    float: left;
+    color: white;
+    text-align: center;
+    padding: 1px 16px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+
+.topnav-right {
+    float: right !important;
+  }
+
+
+/* make links more interesting */
+a	    { color: black; text-decoration: none; }
+#page_bottom a {color: white;}
+/*#page_left a { padding: 0.2em }*/
+a:hover	{ color: white}
+/*#page_left a:hover { color: black; box-shadow: 0px 0px 5px var(--lighter-blue) }*/
+
+
+/*make clickable text visible for the user*/
+.clickables{
+    color: var(--lighter-blue) !important;
+}
+.clickables:hover{ 
+    font-weight: bold;
+    color: var(--lighter-blue);
+}
+
+/**** format menu elements ****/
+#page_right  h1 {font-size: 1.3em;}
+#page_right  h2 {font-size: 1.1em;}
+
+#page_bottom > ul > li { display: inline-block; margin: 0 2em; list-style: none; }
+#page_bottom > ul { margin: 0; padding: 0; }
+
+#page_left   > ul > li	{ margin: 0.5em 0.5em; list-style: none; }
+#page_left   > ul 	{ margin: 0; padding: 0; }
+
+/* tables */
+/*separators between columns/rows*/
+table, th, td 	{   
+    border: 1px solid black; 
+    border-collapse: collapse;}
+th 					{ color: White; }
+/*.buttonColumn 		   { display: flex; justify-content: center; gap: 10px; }*/
+#table_header 		   { background-color: var(--lighter-blue); }
+
+/*database table*/
+#data_name_column 	   { width: 40%; }
+#data_size_column      { width: 10%; }
+#data_sensor_column	   { width: 20%; }
+#data_job_column	   { width: 18%; }
+#data_button_column    { width: 12%; }
+
+/*sensorList table*/
+#sensorList_name_column    { width: 25%; }
+#sensorList_contact_column { width: 15%; }
+#sensorList_jobs_column    { width: 50%; }
+#sensorList_buttons_column { width: 10%; }
+
+/*jobList table*/
+#jobList_name_column            { width: 15%; }
+#jobList_status_column          { width: 10%; }
+#jobList_sensors_column         { width: 25%; }
+#jobList_start_column           { width: 10%; }
+#jobList_end_column             { width: 10%; }
+#jobList_command_column         { width: 25%;}
+#jobList_deleteButton_column    { width: 5%; }
+
+/*userList table*/
+#userList_name_column	   { width: 40%; }
+#userList_active_column    { width: 30%; }
+#userList_type_column      { width: 30%; }
+
+/*
+class of all tables/columns for which we want to automatically cut off any access text with "..." and no wiggling when making items bold on hover,
+note: for it to work, all coluns must be assigned a width in percentage like above that together add up to 100%
+*/
+.tables_with_ellipsis_overflow{
+    width: 100%;
+    table-layout: fixed;
+}
+.columns_with_ellipsis_overflow{
+    overflow: hidden; 
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+/* Buttons */
+button{
+    z-index: 7; /*high z index so they respond reliably on hover... other solutions welcome*/
+    cursor: pointer;
+}
+
+/*normal big buttons on left handside of the page*/
+.normal_buttons{
+    /*background-color: var(--lighter-blue) !important; 
+    color:white !important;*/
+    color: black !important;
+    font-size: 1em;
+    padding: 0.2em !important;
+    border: none !important;
+    background: transparent !important;
+    text-align: left !important;
+}
+.normal_buttons:hover{
+    color: black; box-shadow: 0px 0px 5px var(--lighter-blue);
+}
+
+/*small buttons inside tables and containers*/
+.small_buttons {
+    font: bold 12px Arial;
+    text-decoration: none;
+    background-color: var(--lighter-blue);
+    color: white;
+    margin: 1px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border: 1px solid black;
+    padding: 5px;
+}
+
+/*buttons removing elements: warn user by color*/
+.remove_btn 	{
+    font: bold 12px Arial;
+    background-color: var(--warning-color) !important;
+    color: white;
+}
+
+
+/**** debug-support ****/
+/* Markiert Objekte beim Anklicken: */
+/*.page:active, #content:active { outline: 3px solid blue; } */
+/* bei Bedarf zum Testen aktivieren: */
+/*.page, #content { outline: 1px dashed blue; }*/
+/*... or just use inspect tool in browser*/
+
